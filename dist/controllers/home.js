@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Home page.
  */
 exports.index = (req, res) => {
-    res.render("home", {
-        title: "Home"
+    return res.json({
+        message: "It works!"
     });
 };
 //# sourceMappingURL=home.js.map
