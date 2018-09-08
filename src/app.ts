@@ -69,7 +69,7 @@ app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Origin", "*");
   res.locals.user = req.user;
   next();
 });
@@ -88,26 +88,20 @@ app.use((req, res, next) => {
   next();
 });
 
-const allowCrossDomain : any = function(req : Request, res : any, next : any) {
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-}
-
-app.configure(function() {
-  app.use(allowCrossDomain);
-  //some other code
-});  
-
 app.use(
   express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
 );
 
+const corsOptions : any = {
+  origin: 'http://104.248.62.193:80',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 /**
  * Primary app routes.
  */
-app.get("/api/", homeController.index);
+app.get("/api/", cors(corsOptions), homeController.index);
 app.get("/login", userController.getLogin);
 app.post("/login", userController.postLogin);
 app.get("/logout", userController.logout);
