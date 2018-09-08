@@ -84,6 +84,7 @@ app.use((req, res, next) => {
         req.path == "/account") {
         req.session.returnTo = req.path;
     }
+    res.header("Access-Control-Allow-Origin", "*");
     next();
 });
 app.use(express_1.default.static(path_1.default.join(__dirname, "public"), { maxAge: 31557600000 }));

@@ -33,7 +33,8 @@ import * as passportConfig from "./config/passport";
 
 // Create Express server
 const app = express();
-app.use(cors())
+app.use(cors());
+
 
 // Connect to MongoDB
 const mongoUrl = MONGODB_URI;
@@ -83,6 +84,7 @@ app.use((req, res, next) => {
     req.path == "/account") {
     req.session.returnTo = req.path;
   }
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
