@@ -4,6 +4,7 @@ import session from "express-session";
 import bodyParser from "body-parser";
 import logger from "./util/logger";
 import lusca from "lusca";
+
 import dotenv from "dotenv";
 import mongo from "connect-mongo";
 import flash from "express-flash";
@@ -15,6 +16,7 @@ import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
 const MongoStore = mongo(session);
+const cors = require('cors');
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: ".env.example" });
@@ -31,6 +33,7 @@ import * as passportConfig from "./config/passport";
 
 // Create Express server
 const app = express();
+app.use(cors())
 
 // Connect to MongoDB
 const mongoUrl = MONGODB_URI;

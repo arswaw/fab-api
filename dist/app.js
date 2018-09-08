@@ -25,6 +25,7 @@ const express_validator_1 = __importDefault(require("express-validator"));
 const bluebird_1 = __importDefault(require("bluebird"));
 const secrets_1 = require("./util/secrets");
 const MongoStore = connect_mongo_1.default(express_session_1.default);
+const cors = require('cors');
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv_1.default.config({ path: ".env.example" });
 // Controllers (route handlers)
@@ -36,6 +37,7 @@ const contactController = __importStar(require("./controllers/contact"));
 const passportConfig = __importStar(require("./config/passport"));
 // Create Express server
 const app = express_1.default();
+app.use(cors());
 // Connect to MongoDB
 const mongoUrl = secrets_1.MONGODB_URI;
 mongoose_1.default.Promise = bluebird_1.default;
