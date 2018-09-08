@@ -84,9 +84,20 @@ app.use((req, res, next) => {
     req.path == "/account") {
     req.session.returnTo = req.path;
   }
-  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+
+const allowCrossDomain : any = function(req : Request, res : any, next : any) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}
+
+app.configure(function() {
+  app.use(allowCrossDomain);
+  //some other code
+});  
 
 app.use(
   express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
