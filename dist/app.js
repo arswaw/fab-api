@@ -68,6 +68,7 @@ app.use(express_flash_1.default());
 app.use(lusca_1.default.xframe("SAMEORIGIN"));
 app.use(lusca_1.default.xssProtection(true));
 app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
     res.locals.user = req.user;
     next();
 });
