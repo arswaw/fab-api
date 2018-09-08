@@ -90,7 +90,7 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "public"), { max
 /**
  * Primary app routes.
  */
-app.get("/", homeController.index);
+app.get("/api/", homeController.index);
 app.get("/login", userController.getLogin);
 app.post("/login", userController.postLogin);
 app.get("/logout", userController.logout);
